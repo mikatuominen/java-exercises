@@ -13,7 +13,9 @@ public class Main {
     public static void main(String[] args) {
         filterDemo(SourceData.getNameList());
         mapDemo(SourceData.getNameList());
-        sortDemo(SourceData.getNameList());
+        System.out.println("***");
+        System.out.println(sortDemo(SourceData.getNameList()));
+        System.out.println("***");
         System.out.println(getSortedDemo(SourceData.getNameList()));
         System.out.println("Total of the names: " + countDemo(SourceData.getNameList()));
         System.out.println();
@@ -46,14 +48,16 @@ public class Main {
                 .forEach(System.out::println);
     }
 
-    // Output sorted and uppercase the names that starts with the letter A.
-    public static void sortDemo(List<String> names) {
-        names.stream()
+    public static List<String> sortDemo(List<String> names) {
+        return names.stream()
                 .sorted()
                 .filter((s) -> s.startsWith("A"))
                 .map(String::toUpperCase)
-                .forEach(System.out::println);
+                .peek(System.out::println)
+                //.forEach(System.out::println);
+                .collect(Collectors.toList());
     }
+    // Output sorted and uppercase the names that starts with the letter A.
 
     // Return sorted and uppercase the names that starts with the letter A.
     public static List<String> getSortedDemo(List<String> names) {
@@ -74,7 +78,6 @@ public class Main {
     public static boolean matchDemo(List<String> names, String match) {
         return names.stream()
                 .anyMatch((s) -> s.startsWith(match));
-
     }
 
     public static void testEmployees(List<Employee> employees) {
